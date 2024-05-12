@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Raksha</string>
+    <string name="background_image_description">login options</string>
+    <string name="tab_layout_description">Tabs for navigation</string>
+</resources>

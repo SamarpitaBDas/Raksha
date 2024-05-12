@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    RRGGBB
+    <color name="black">#FF000000</color>
+    <color name="pink">#ff5474</color>
+    <color name="lightpink">#ff96aa</color>
+    <color name="lighterpink">#feb7c9</color>
+    <color name="babypink">#ffe9ee</color>
+    <color name="white">#FFFFFFFF</color>
+</resources>
