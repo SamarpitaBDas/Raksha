@@ -21,9 +21,9 @@ public class login_activity extends AppCompatActivity {
 
         tabLayout= findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
-        fb = findViewById(R.id.fab_fb);
-        google = findViewById(R.id.fab_google);
-        twitter = findViewById(R.id.fab_twitter);
+//        fb = findViewById(R.id.fab_fb);
+//        google = findViewById(R.id.fab_google);
+//        twitter = findViewById(R.id.fab_twitter);
 
 
         tabLayout.addTab((tabLayout.newTab().setText("Login")));
@@ -35,20 +35,19 @@ public class login_activity extends AppCompatActivity {
 
         viewPager.addOnPageChangeListener((new TabLayout.TabLayoutOnPageChangeListener(tabLayout)));
 
-        fb.setTranslationY((300));
-        google.setTranslationY(300);
-        twitter.setTranslationY(300);
+//        fb.setTranslationY((300));
+//        google.setTranslationY(300);
+//        twitter.setTranslationY(300);
         tabLayout.setTranslationY(300);
 
-        fb.setAlpha(v);
-        twitter.setAlpha(v);
-        google.setAlpha(v);
+//        fb.setAlpha(v);
+//        twitter.setAlpha(v);
+//        google.setAlpha(v);
         tabLayout.setAlpha(v);
 
-        fb.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
-        twitter.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(600).start();
-        google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(800).start();
-        return root;
+//        fb.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(400).start();
+//        twitter.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(600).start();
+//        google.animate().translationY(0).alpha(1).setDuration(1000).setStartDelay(800).start();
 
     }
 
