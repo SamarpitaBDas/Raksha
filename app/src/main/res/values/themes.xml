@@ -4,5 +4,19 @@
         <!-- Customize your light theme here. -->
     </style>
 
+    <style name="Theme.BottomNavigation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/lighterpink</item>
+        <item name="colorPrimaryVariant">@color/lighterpink</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/lightpink</item>
+        <item name="colorSecondaryVariant">@color/lightpink</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
     <style name="Theme.Raksha" parent="Base.Theme.Raksha" />
 </resources>

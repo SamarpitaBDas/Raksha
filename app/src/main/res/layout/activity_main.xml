@@ -7,11 +7,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <Button
-        android:onClick="login_activity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="lets get started">
-    </Button>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="131dp"
+        android:layout_marginTop="484dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="192dp"
+        android:onClick="login_activity"
+        android:text="lets get started"></Button>
+
 </RelativeLayout>
 
