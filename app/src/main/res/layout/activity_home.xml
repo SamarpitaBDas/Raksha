@@ -6,4 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <include layout="@layout/activity_nav_bottom" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

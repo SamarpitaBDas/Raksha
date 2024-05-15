@@ -17,7 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
-    EditText signupPhoneNumber, signupUsername, signupEmail, signupPassword;
+    EditText signupPhoneNumber, signupUsername, signupEmail, signupPassword,signupinput;
     Button signupButton;
     FirebaseDatabase database;
     TextView loginRedirectText; // This was missing initialization
@@ -34,6 +34,7 @@ public class SignupActivity extends AppCompatActivity {
         signupPassword = findViewById(R.id.signupPassword);
         signupButton = findViewById(R.id.signupbutton);
         loginRedirectText = findViewById(R.id.loginRedirectText); // Initialize loginRedirectText
+        signupinput = findViewById(R.id.signupinputTV);
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,13 +45,16 @@ public class SignupActivity extends AppCompatActivity {
                 String email = signupEmail.getText().toString();
                 String username = signupUsername.getText().toString();
                 String password = signupPassword.getText().toString();
-                HelperClass helperClass = new HelperClass(name, email, username, password);
+                String role = signupinput.getText().toString(); // Get the selected role
+                HelperClass helperClass = new HelperClass(name, email, username, password, role);
                 reference.child(username).setValue(helperClass);
-                Toast.makeText(SignupActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignupActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
+
+
 
         loginRedirectText.setOnClickListener(new View.OnClickListener() {
             @Override
