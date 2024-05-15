@@ -18,7 +18,9 @@
     <item android:top="80dp"> <!-- Adjust the top offset as needed -->
         <shape android:shape="rectangle">
             <solid android:color="@color/pink"/> <!-- Set your desired color for the top rectangle -->
-            <corners android:radius="40dp"/> <!-- Adjust the corner radius as needed -->
+            <corners
+                android:topLeftRadius="40dp"
+                android:topRightRadius="40dp"/> <!-- Adjust the corner radius as needed -->
         </shape>
     </item>
 </layer-list>

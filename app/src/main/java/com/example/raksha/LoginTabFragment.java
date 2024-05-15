@@ -24,10 +24,10 @@ public class LoginTabFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstances){
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.login_tab_fragment, container, false);
 
-        email = root.findViewById(R.id.Username);
-        pass = root.findViewById(R.id.Password);
+        email = root.findViewById(R.id.login_username);
+        pass = root.findViewById(R.id.login_password);
         forgetPass = root.findViewById(R.id.forgotPasswordTextView);
-        login = root.findViewById(R.id.loginButton);
+        login = root.findViewById(R.id.login_button);
 
         email.setTranslationX(800);
         pass.setTranslationX(800);

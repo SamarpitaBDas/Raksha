@@ -33,7 +33,7 @@
             app:cardElevation="4dp">
 
             <EditText
-                android:id="@+id/Username"
+                android:id="@+id/signupUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@android:color/transparent"
@@ -58,10 +58,35 @@
 
             <!-- Email EditText -->
             <EditText
-                android:id="@+id/Email"
+                android:id="@+id/signupEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email/Phone Number"
+                android:hint="Email"
+                android:padding="16dp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@android:color/transparent" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Phone_number CardView -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/phone_numberCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/lightpink">
+
+            <!-- Email EditText -->
+            <EditText
+                android:id="@+id/signupphone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
                 android:padding="16dp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
@@ -83,7 +108,7 @@
 
             <!-- Password EditText -->
             <EditText
-                android:id="@+id/Password"
+                android:id="@+id/signupPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Password"
@@ -108,7 +133,7 @@
 
             <!-- Confirm Password EditText -->
             <EditText
-                android:id="@+id/ConfirmPassword"
+                android:id="@+id/signupConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Confirm Password"
@@ -137,8 +162,8 @@
             app:boxBackgroundColor="@color/lightpink"
             android:layout_marginTop="20dp">
 
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/inputTV"
+            a<com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/signupinputTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
@@ -147,7 +172,8 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button"
+            android:onClick="db_add"
+            android:id="@+id/signupbutton"
             android:layout_width="295dp"
             android:layout_height="70dp"
             android:layout_marginTop="20sp"
@@ -156,6 +182,18 @@
             android:text="Sign Up"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/loginRedirectText"
+            android:text="already a member? Login"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/lightpink"
+            android:textSize="18sp"/>
+
     </LinearLayout>
 
 </ScrollView>

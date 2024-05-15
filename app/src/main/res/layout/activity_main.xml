@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@mipmap/bg">
 
     <Button
         android:layout_width="wrap_content"
@@ -20,7 +21,9 @@
         android:layout_marginEnd="136dp"
         android:layout_marginBottom="192dp"
         android:onClick="login_activity"
-        android:text="lets get started"></Button>
+        android:text="lets get started"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/lighterpink"></Button>
 
 </RelativeLayout>
 

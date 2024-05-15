@@ -7,4 +7,8 @@
     <color name="lighterpink">#feb7c9</color>
     <color name="babypink">#ffe9ee</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="pinker">#FFE6E6</color>
+    <color name="pinkishpurple">#E1AFD1</color>
+    <color name="pinkerpurple">#AD88C6</color>
+    <color name="purple">#7469B6</color>
 </resources>

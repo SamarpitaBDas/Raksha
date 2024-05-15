@@ -25,9 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
     }
-
-
-
     public void login_activity(View view){
         Intent i = new Intent(this, login_activity.class);
         Bundle b= ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
@@ -39,5 +36,4 @@ public class MainActivity extends AppCompatActivity {
         Bundle b= ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
         startActivity(i);
     }
-
 }
