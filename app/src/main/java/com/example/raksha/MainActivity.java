@@ -26,14 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void login_activity(View view){
-        Intent i = new Intent(this, login_activity.class);
+        Intent i = new Intent(this, SignupActivity.class);
         Bundle b= ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
         startActivity(i);
     }
 
-    public void HomeActivity(View view){
-        Intent i = new Intent(this, HomeActivity.class);
-        Bundle b= ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
-        startActivity(i);
-    }
+
 }

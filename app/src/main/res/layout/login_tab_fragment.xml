@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,7 +16,8 @@
         app:layout_constraintBottom_toTopOf="@+id/usernameCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="150dp"/>
 
     <!-- Username CardView -->
     <androidx.cardview.widget.CardView
@@ -89,7 +91,7 @@
         app:layout_constraintVertical_bias="0.542" />
 
     <Button
-        android:onClick="HomeActivity"
+        android:onClick="home_activity"
         android:id="@+id/login_button"
         android:layout_width="295dp"
         android:layout_height="70dp"
@@ -113,7 +115,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button" />
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        android:clickable="true"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,31 +2,27 @@ package com.example.raksha;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import android.content.Intent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-
-public class SignuptabActivity extends AppCompatActivity {
+public class SignupActivity extends AppCompatActivity {
     EditText signupPhoneNumber, signupUsername, signupEmail, signupPassword;
     Button signupButton;
     FirebaseDatabase database;
-    TextView loginRedirectText;
+    TextView loginRedirectText; // This was missing initialization
     DatabaseReference reference;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +33,7 @@ public class SignuptabActivity extends AppCompatActivity {
         signupUsername = findViewById(R.id.signupUsername);
         signupPassword = findViewById(R.id.signupPassword);
         signupButton = findViewById(R.id.signupbutton);
+        loginRedirectText = findViewById(R.id.loginRedirectText); // Initialize loginRedirectText
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,35 +46,23 @@ public class SignuptabActivity extends AppCompatActivity {
                 String password = signupPassword.getText().toString();
                 HelperClass helperClass = new HelperClass(name, email, username, password);
                 reference.child(username).setValue(helperClass);
-                Toast.makeText(SignuptabActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignuptabActivity.this, login_activity.class);
+                Toast.makeText(SignupActivity.this, "You have signup successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
+
         loginRedirectText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignuptabActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
 
+        // Correct initialization for TextInputLayout and MaterialAutoCompleteTextView
         TextInputLayout textInputLayout = findViewById(R.id.inputLayout);
         MaterialAutoCompleteTextView autoCompleteTextView = findViewById(R.id.signupinputTV);
         MaterialButton button = findViewById(R.id.signupbutton);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (autoCompleteTextView.getText().toString().isEmpty()) {
-                    textInputLayout.setError("Select an option");
-                } else {
-                    Toast.makeText(SignuptabActivity.this, autoCompleteTextView.getText().toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
-
-
-
 }

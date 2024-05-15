@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         signupRedirectText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignuptabActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intent);
             }
         });
@@ -89,27 +89,27 @@ public class LoginActivity extends AppCompatActivity {
         checkUserDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
                 if (snapshot.exists()){
-
                     loginUsername.setError(null);
                     String passwordFromDB = snapshot.child(userUsername).child("password").getValue(String.class);
 
                     if (passwordFromDB.equals(userPassword)) {
                         loginUsername.setError(null);
 
+                        // Retrieve user data if needed
                         String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
+                        // Start HomeActivity
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        // Pass user data to HomeActivity if needed
                         intent.putExtra("name", nameFromDB);
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("username", usernameFromDB);
-                        intent.putExtra("password", passwordFromDB);
-
                         startActivity(intent);
+                        // Finish LoginActivity to prevent returning to it by pressing back button
+                        finish();
                     } else {
                         loginPassword.setError("Invalid Credentials");
                         loginPassword.requestFocus();
