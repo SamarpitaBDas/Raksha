@@ -30,6 +30,4 @@ public class MainActivity extends AppCompatActivity {
         Bundle b= ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
         startActivity(i);
     }
-
-
 }

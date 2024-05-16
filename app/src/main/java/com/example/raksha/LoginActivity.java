@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -104,9 +103,10 @@ public class LoginActivity extends AppCompatActivity {
                         // Start HomeActivity
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         // Pass user data to HomeActivity if needed
-                        intent.putExtra("name", nameFromDB);
+                        intent.putExtra("name", userUsername);
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("username", usernameFromDB);
+                        intent.putExtra("password", userPassword); // Pass the password
                         startActivity(intent);
                         // Finish LoginActivity to prevent returning to it by pressing back button
                         finish();
