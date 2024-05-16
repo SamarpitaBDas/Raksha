@@ -4,19 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pink"
     tools:context=".ReportActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Reports"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textColor="@color/white"/>
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginBottom="120dp">
+
+        <!-- Location Input Field -->
+        <EditText
+            android:id="@+id/locationEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:hint="Location"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <!-- Description Input Field -->
+        <EditText
+            android:id="@+id/descriptionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            android:minLines="3" />
+
+        <!-- Accused Input Field -->
+        <EditText
+            android:id="@+id/accusedEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Accused"
+            android:inputType="text"
+            android:minHeight="48dp" />
+
+        <!-- Timestamp Display -->
+        <TextView
+            android:id="@+id/timestampTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:text="Timestamp"
+            android:textSize="16sp" />
+
+        <!-- Submit Button -->
+        <Button
+            android:id="@+id/submitReportButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Submit Report"
+            android:backgroundTint="@color/lightpink"/>
+
+    </LinearLayout>
+
 
     <include layout="@layout/activity_nav_bottom" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

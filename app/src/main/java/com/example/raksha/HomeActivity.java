@@ -42,11 +42,24 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference casesRef;
     private TextView casesCountTextView;
 
+    private String username;
+    private double latitude;
+    private double longitude;
+
+    private String password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        // Retrieve username and password from intent
+        Intent intent = getIntent();
+        if (intent != null) {
+            username = intent.getStringExtra("username");
+            password = intent.getStringExtra("password");
+            // Use username and password as needed
+        }
 
 
         // Initialize Firebase Database reference
@@ -89,7 +102,12 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(HomeActivity.this, EmergencyActivity.class));
                     return true;
                 } else if (itemId == R.id.report) {
-                    startActivity(new Intent(HomeActivity.this, ReportActivity.class));
+                    // Start ReportActivity and pass username, latitude, and longitude
+                    Intent intent = new Intent(HomeActivity.this, ReportActivity.class);
+                    intent.putExtra("username", username);
+                    intent.putExtra("latitude", latitude);
+                    intent.putExtra("longitude", longitude);
+                    startActivity(intent);
                     return true;
                 } else if (itemId == R.id.community) {
                     startActivity(new Intent(HomeActivity.this, CommunityActivity.class));
@@ -237,5 +255,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
     }
-
+    private void addDescriptionToCardView(TextView textView, String description) {
+        if (description != null) {
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(description);
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+    }
 }

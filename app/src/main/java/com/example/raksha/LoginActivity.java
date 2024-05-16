@@ -103,9 +103,8 @@ public class LoginActivity extends AppCompatActivity {
                         // Start HomeActivity
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         // Pass user data to HomeActivity if needed
-                        intent.putExtra("name", userUsername);
                         intent.putExtra("email", emailFromDB);
-                        intent.putExtra("username", usernameFromDB);
+                        intent.putExtra("username", userUsername);
                         intent.putExtra("password", userPassword); // Pass the password
                         startActivity(intent);
                         // Finish LoginActivity to prevent returning to it by pressing back button
