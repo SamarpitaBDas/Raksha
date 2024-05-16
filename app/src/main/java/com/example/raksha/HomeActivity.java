@@ -12,6 +12,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -19,9 +20,12 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.example.raksha.R;
+import com.google.firebase.database.ValueEventListener;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -29,15 +33,49 @@ public class HomeActivity extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationProviderClient;
     private DatabaseReference locationRef;
 
+    private DatabaseReference emergencyCallsRef;
+    private TextView emergencyCallsCountTextView;
+
+    private DatabaseReference reportsRef;
+    private TextView reportsCountTextView;
+
+    private DatabaseReference casesRef;
+    private TextView casesCountTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
+
+        // Initialize Firebase Database reference
+        emergencyCallsRef = FirebaseDatabase.getInstance().getReference("emergency_calls");
+
+        // Initialize TextView for emergency calls count
+        emergencyCallsCountTextView = findViewById(R.id.emergencyCallsCountTextView);
+
+        // Retrieve emergency calls count from Firebase
+        retrieveEmergencyCallsCount();
+
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         locationRef = FirebaseDatabase.getInstance().getReference("users");
 
         getLastLocation();
+
+        // Initialize Firebase Database reference for reports
+        reportsRef = FirebaseDatabase.getInstance().getReference("reports");
+
+        // Initialize TextView for reports count
+        reportsCountTextView = findViewById(R.id.reportsCountTextView);
+
+        // Retrieve reports count from Firebase
+        retrieveReportsCount();
+
+        casesRef = FirebaseDatabase.getInstance().getReference("cases");
+        casesCountTextView = findViewById(R.id.casesCountTextView);
+        retrieveCasesCount();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -143,4 +181,61 @@ public class HomeActivity extends AppCompatActivity {
             }
         }
     }
+    private void retrieveEmergencyCallsCount() {
+        emergencyCallsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Get total number of emergency calls
+                long emergencyCallsCount = dataSnapshot.getChildrenCount();
+
+                // Update TextView with the count
+                emergencyCallsCountTextView.setText(String.valueOf(emergencyCallsCount));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Toast.makeText(HomeActivity.this, "Failed to retrieve emergency calls count", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void retrieveReportsCount() {
+        reportsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Get total number of reports
+                long reportsCount = dataSnapshot.getChildrenCount();
+
+                // Update TextView with the count
+                reportsCountTextView.setText(String.valueOf(reportsCount));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Toast.makeText(HomeActivity.this, "Failed to retrieve reports count", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void retrieveCasesCount() {
+        casesRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // Get total number of cases
+                long casesCount = dataSnapshot.getChildrenCount();
+
+                // Update TextView with the count
+                casesCountTextView.setText(String.valueOf(casesCount));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Toast.makeText(HomeActivity.this, "Failed to retrieve cases count", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 }

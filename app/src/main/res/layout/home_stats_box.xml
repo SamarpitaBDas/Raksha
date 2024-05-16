@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="@drawable/home_rectangle"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
+
+
+
+    <!-- Title for Emergency Calls -->
+
+    <!-- TextView to display the count of emergency calls -->
+
+    <TextView
+        android:id="@+id/emergencyCallsCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_marginLeft="40dp"
+        android:textColor="@color/white"
+        android:textSize="45sp" />
+
+    <TextView
+        android:id="@+id/emergencyCallsTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency\nCalls"
+        android:layout_below="@id/emergencyCallsCountTextView"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginLeft="16dp"
+        android:textColor="@color/white"/>
+
+
+
+    <!-- TextView to display the count of reports -->
+    <!-- Title for Reports -->
+
+    <TextView
+        android:id="@+id/reportsCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="59dp"
+        android:layout_toEndOf="@id/emergencyCallsTitleTextView"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="45sp" />
+
+    <!-- TextView to display the count of cases -->
+
+
+    <!-- Title for Cases -->
+
+    <TextView
+        android:id="@+id/reportsTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reportsCountTextView"
+        android:layout_alignBaseline="@id/emergencyCallsTitleTextView"
+        android:layout_marginStart="44dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="-1dp"
+        android:layout_toEndOf="@id/emergencyCallsTitleTextView"
+        android:text="Reports"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/casesCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_toEndOf="@id/emergencyCallsTitleTextView"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="45sp" />
+
+    <TextView
+        android:id="@+id/casesTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/reportsTitleTextView"
+        android:layout_marginStart="57dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@id/reportsTitleTextView"
+        android:text="Cases"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
+
