@@ -27,10 +27,10 @@ public class CommunityActivity extends AppCompatActivity {
                 communityusername = intent.getStringExtra("username");
                 Log.d("LoginActivity", "Username: " + communityusername);
                 if (itemId == R.id.home){
-
-                    Log.d("LoginActivity", "Username: " + communityusername);
-                    startActivity(new Intent(CommunityActivity.this, HomeActivity.class)
-                            .putExtra("username", communityusername));
+                    Intent communityIntent = new Intent(CommunityActivity.this, HomeActivity.class);
+                    communityIntent.putExtra("username", communityusername);
+                    communityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(communityIntent);
                     return true;
                 } else if (itemId == R.id.emergency) {
 
@@ -51,4 +51,5 @@ public class CommunityActivity extends AppCompatActivity {
             }
         });
     }
+//    TODO create community tab to store the posts etc
 }

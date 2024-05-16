@@ -4,16 +4,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/pink"
     tools:context=".EmergencyActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/faculty_call"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Emergency"
-        android:gravity="center"
-        android:textSize="30sp"
-        android:textColor="@color/white"/>
+        android:layout_height="60dp"
+        android:backgroundTint="@color/lightpink"
+        android:text="CALL FACULTY"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="119dp"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:id="@+id/call_police"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/lightpink"
+        android:text="CALL 100"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="200dp"
+        android:layout_margin="20dp"/>
+
+    <Button
+        android:id="@+id/call_hospital"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/lightpink"
+        android:text="CALL AMBULANCE"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="280dp"
+        android:layout_margin="20dp"/>
+
+<!--    women helpline 1090-->
+    <Button
+        android:id="@+id/call_womenhp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/lightpink"
+        android:text="CALL WOMEN HELPLINE"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="360dp"
+        android:layout_margin="20dp"/>
+
+<!--    Uttar Pradesh Women's Commission Helpline: +91-9454401122-->
+
+    <Button
+        android:id="@+id/call_womencommision"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/lightpink"
+        android:text="CALL WOMEN's COMMISION HELPLINE"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="440dp"
+        android:layout_margin="20dp"/>
+
+<!--    Mahila Samman Prakoshth (Women's Honor Cell): +91-522-2614978-->
+    <Button
+        android:id="@+id/call_women_honor_call"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/lightpink"
+        android:text="CALL WOMEN's HONOR CALL"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="520dp"
+        android:layout_margin="20dp"/>
+
 
     <include layout="@layout/activity_nav_bottom" />
 
