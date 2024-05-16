@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (!validateUsername() | !validatePassword()) {
-
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
                 } else {
                     checkUser();
                 }
@@ -102,11 +105,11 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Start HomeActivity
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        // Pass user data to HomeActivity if needed
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("email", emailFromDB);
-                        intent.putExtra("username", userUsername);
-                        intent.putExtra("password", userPassword); // Pass the password
+                        intent.putExtra("username", userUsername); // Pass the username
                         startActivity(intent);
+
                         // Finish LoginActivity to prevent returning to it by pressing back button
                         finish();
                     } else {

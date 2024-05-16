@@ -26,8 +26,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void login_activity(View view){
-        Intent i = new Intent(this, SignupActivity.class);
-        Bundle b= ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
-        startActivity(i);
+        Intent intent = new Intent(this, SignupActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(this).toBundle();
+        startActivity(intent, bundle);
     }
 }

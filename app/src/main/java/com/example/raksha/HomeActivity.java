@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -42,24 +43,23 @@ public class HomeActivity extends AppCompatActivity {
     private DatabaseReference casesRef;
     private TextView casesCountTextView;
 
-    private String username;
+    public String homeusername;
     private double latitude;
     private double longitude;
 
-    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Retrieve username and password from intent
-        Intent intent = getIntent();
-        if (intent != null) {
-            username = intent.getStringExtra("username");
-            password = intent.getStringExtra("password");
-            // Use username and password as needed
-        }
+//        // Retrieve username and password from intent
+//        Intent intent = getIntent();
+//
+//        homeusername = intent.getStringExtra("username");
+//        homepassword = intent.getStringExtra("password");
+//        Log.d("LoginActivity", "Username: " + homeusername);
+//        Log.d("LoginActivity", "password: " + homepassword);
 
 
         // Initialize Firebase Database reference
@@ -95,22 +95,25 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
-                if (itemId == R.id.home){
-                    startActivity(new Intent(HomeActivity.this, HomeActivity.class));
-                    return true;
-                } else if (itemId == R.id.emergency) {
-                    startActivity(new Intent(HomeActivity.this, EmergencyActivity.class));
+                // Retrieve username and password from intent
+                Intent intent = getIntent();
+
+                homeusername = intent.getStringExtra("username");
+                Log.d("LoginActivity", "Username: " + homeusername);
+                if (itemId == R.id.emergency) {
+                    Log.d("LoginActivity", "Username: " + homeusername);
+                    startActivity(new Intent(HomeActivity.this, EmergencyActivity.class)
+                            .putExtra("username", homeusername));
                     return true;
                 } else if (itemId == R.id.report) {
-                    // Start ReportActivity and pass username, latitude, and longitude
-                    Intent intent = new Intent(HomeActivity.this, ReportActivity.class);
-                    intent.putExtra("username", username);
-                    intent.putExtra("latitude", latitude);
-                    intent.putExtra("longitude", longitude);
-                    startActivity(intent);
+                    Log.d("LoginActivity", "Username: " + homeusername);
+                    startActivity(new Intent(HomeActivity.this, ReportActivity.class)
+                            .putExtra("username", homeusername));
                     return true;
                 } else if (itemId == R.id.community) {
-                    startActivity(new Intent(HomeActivity.this, CommunityActivity.class));
+                    Log.d("LoginActivity", "Username: " + homeusername);
+                    startActivity(new Intent(HomeActivity.this, CommunityActivity.class)
+                            .putExtra("username", homeusername));
                     return true;
                 }else {
                     return false;
