@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+//TODO create community tab
+
 public class CommunityActivity extends AppCompatActivity {
 
     //    TODO create adapters etc for community tab  to handle posting andd storing of the posts

@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+//TODO closing of report activity as soon as the report is registered
 public class ReportActivity extends AppCompatActivity {
     private EditText locationEditText, descriptionEditText, accusedEditText;
     private String reportusername;

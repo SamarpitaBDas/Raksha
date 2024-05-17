@@ -5,7 +5,9 @@
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
+
     <queries>
+
         <!-- Specific intents you query for -->
         <intent>
             <action android:name="android.intent.action.DIAL" />
@@ -27,6 +29,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Raksha"
         tools:targetApi="31">
+        <activity
+            android:name=".MapActivity"
+            android:exported="false" />
         <activity
             android:name=".CommunityActivity"
             android:exported="false" />

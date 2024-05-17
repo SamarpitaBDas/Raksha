@@ -4,7 +4,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.raksha.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+//TODO the white circle appearing on the home
 public class nav_bottom extends AppCompatActivity {
 
     private ActivityMainBinding binding;

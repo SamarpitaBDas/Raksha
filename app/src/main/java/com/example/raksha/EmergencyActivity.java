@@ -31,6 +31,8 @@ import java.util.Map;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+//TODO storing total number of emergency calls recieved and the location of the emergency call recieved in the database
+
 public class EmergencyActivity extends AppCompatActivity {
 
     private Map<String, Location> facultyLocations = new HashMap<>();

@@ -16,6 +16,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+//TODO storing the phonenumber and role of the user
+
 public class SignupActivity extends AppCompatActivity {
     EditText signupPhoneNumber, signupUsername, signupEmail, signupPassword,signupinput;
     Button signupButton;
