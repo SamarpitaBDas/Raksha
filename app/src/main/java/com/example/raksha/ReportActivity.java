@@ -51,8 +51,10 @@ public class ReportActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.home) {
-                    startActivity(new Intent(ReportActivity.this, HomeActivity.class)
-                            .putExtra("username", reportusername));
+                    Intent communityIntent = new Intent(ReportActivity.this, HomeActivity.class);
+                    communityIntent.putExtra("username", reportusername);
+                    communityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(communityIntent);
                     return true;
                 } else if (itemId == R.id.emergency) {
                     startActivity(new Intent(ReportActivity.this, EmergencyActivity.class)

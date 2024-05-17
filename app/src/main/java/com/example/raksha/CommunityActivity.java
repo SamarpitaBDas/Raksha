@@ -19,6 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class CommunityActivity extends AppCompatActivity {
+
+    //    TODO create adapters etc for community tab  to handle posting andd storing of the posts
     public String communityusername;
     private TextView usernameTextView, timestampTextView, postContentTextView;
     @Override
@@ -100,5 +102,4 @@ public class CommunityActivity extends AppCompatActivity {
                 });
     }
 
-//    TODO create community tab to store the posts etc
 }

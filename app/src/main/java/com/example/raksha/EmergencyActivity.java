@@ -20,7 +20,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class EmergencyActivity extends AppCompatActivity {
 
 //    TODO logic for emergency calling the nearest faculty
+
 //    TODO loginpage-error, intents handle , white navbar, call , emergency nearest faculty, community tab beautify create
+
+    //TODO bug fix opens by itself after login and doesn't let the homepage open up
     public static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
 
     public String emergencyusername;
