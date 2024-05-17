@@ -1,5 +1,7 @@
 package com.example.raksha;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -11,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,11 +36,6 @@ public class EmergencyActivity extends AppCompatActivity {
     private Map<String, Location> facultyLocations = new HashMap<>();
     private DatabaseReference databaseReference;
 
-    //TODO logic for emergency calling the nearest faculty
-
-    //TODO loginpage-error, intents handle , white navbar, call , emergency nearest faculty, community tab beautify create
-
-    //TODO bug fix opens by itself after login and doesn't let the homepage open up
     public static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
 
     public String emergencyusername;
@@ -46,12 +45,15 @@ public class EmergencyActivity extends AppCompatActivity {
     Button call_womenhp;
     Button call_womencommision;
     Button call_women_honor_call;
+    private double latitude_em;
+    private double longitude_em;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency);
 
+        // Initialize buttons
         faculty_call = findViewById(R.id.faculty_call);
         call_police = findViewById(R.id.call_police);
         call_hospital = findViewById(R.id.call_hospital);
@@ -59,13 +61,20 @@ public class EmergencyActivity extends AppCompatActivity {
         call_womencommision = findViewById(R.id.call_womencommision);
         call_women_honor_call = findViewById(R.id.call_women_honor_call);
 
-
         // Initialize Firebase Realtime Database reference
         databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
 
         // Populate faculty locations from Firebase Realtime Database
         populateFacultyLocations();
 
+        // Retrieve username from intent
+        Intent intent = getIntent();
+        emergencyusername = intent.getStringExtra("username");
+
+        // Fetch user's location data from database
+        fetchUserLocationFromDatabase(emergencyusername);
+
+        // Set up bottom navigation view listener
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -74,7 +83,7 @@ public class EmergencyActivity extends AppCompatActivity {
                 Intent intent = getIntent();
 
                 emergencyusername = intent.getStringExtra("username");
-                if (itemId == R.id.home){
+                if (itemId == R.id.home) {
                     startActivity(new Intent(EmergencyActivity.this, HomeActivity.class)
                             .putExtra("username", emergencyusername));
 
@@ -94,18 +103,27 @@ public class EmergencyActivity extends AppCompatActivity {
                 } else {
                     return false;
                 }
-
             }
         });
 
+        // Set click listener for faculty call button
         faculty_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Location currentUserLocation = getCurrentUserLocation();
+                Location currentUserLocation = getCurrentUserLocation(latitude_em, longitude_em);
                 if (currentUserLocation != null) {
                     String nearestFaculty = findNearestFaculty(currentUserLocation);
                     if (nearestFaculty != null) {
-                        makePhoneCall(nearestFaculty);
+                        getfacultynumber(nearestFaculty, new FacultyNumberCallback() {
+                            @Override
+                            public void onCallback(String phoneNumber) {
+                                if (phoneNumber != null) {
+                                    makePhoneCall(phoneNumber);
+                                } else {
+                                    Toast.makeText(EmergencyActivity.this, "Unable to retrieve faculty phone number", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
                     } else {
                         Toast.makeText(EmergencyActivity.this, "No faculty found", Toast.LENGTH_SHORT).show();
                     }
@@ -115,6 +133,7 @@ public class EmergencyActivity extends AppCompatActivity {
             }
         });
 
+        // Set click listeners for other emergency call buttons
         call_police.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,28 +170,80 @@ public class EmergencyActivity extends AppCompatActivity {
         });
     }
 
+    // Method to retrieve the nearest faculty phone number
+    private void getfacultynumber(String nearestFaculty, FacultyNumberCallback callback) {
+        FirebaseDatabase.getInstance().getReference("users").child(nearestFaculty)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // Retrieve user's phone number
+                            String phoneNumber = dataSnapshot.child("phone").getValue(String.class);
+                            callback.onCallback(phoneNumber);
+                            Log.d(TAG, "Faculty phone number retrieved: " + phoneNumber);
+                        } else {
+                            callback.onCallback(null); // User data doesn't exist
+                            Log.d(TAG, "No faculty data found for: " + nearestFaculty);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        callback.onCallback(null); // Handle cancellation or error
+                        Log.d(TAG, "Error retrieving faculty data: " + databaseError.getMessage());
+                    }
+                });
+    }
+
+    // Method to make a phone call
     private void makePhoneCall(String phoneNumber) {
         if (ContextCompat.checkSelfPermission(EmergencyActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(EmergencyActivity.this, new String[]{Manifest.permission.CALL_PHONE}, MY_PERMISSIONS_REQUEST_CALL_PHONE);
         } else {
             String dial = "tel:" + phoneNumber;
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+            Log.d(TAG, "Making phone call to: " + phoneNumber);
         }
     }
 
+    // Handle call permission request result
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, you can make the phone call
+                Log.d(TAG, "CALL_PHONE permission granted.");
             } else {
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "CALL_PHONE permission denied.");
             }
         }
     }
 
-    // Method to populate facultyLocations map with faculty members' locations
-    // Method to populate facultyLocations map with faculty members' locations
+    // Fetch user's location data from the database
+    private void fetchUserLocationFromDatabase(String username) {
+        FirebaseDatabase.getInstance().getReference("users").child(username)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            // Retrieve user's location data
+                            latitude_em = dataSnapshot.child("latitude").getValue(Double.class);
+                            longitude_em = dataSnapshot.child("longitude").getValue(Double.class);
+                            Log.d(TAG, "User location retrieved: Latitude = " + latitude_em + ", Longitude = " + longitude_em);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        // Handle error
+                        Log.d(TAG, "Error retrieving user location: " + databaseError.getMessage());
+                    }
+                });
+    }
+
+    // Populate faculty locations from Firebase Realtime Database
     private void populateFacultyLocations() {
         // Add listener to retrieve data from Firebase Realtime Database
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -190,6 +261,7 @@ public class EmergencyActivity extends AppCompatActivity {
                             setLatitude(latitude);
                             setLongitude(longitude);
                         }});
+                        Log.d(TAG, "Faculty location added: Username = " + username + ", Latitude = " + latitude + ", Longitude = " + longitude);
                     }
                 }
             }
@@ -198,19 +270,17 @@ public class EmergencyActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // Handle error
                 Toast.makeText(EmergencyActivity.this, "Failed to retrieve data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Error retrieving faculty locations: " + databaseError.getMessage());
             }
         });
     }
 
-
-    // Method to get current user location
-    private Location getCurrentUserLocation() {
-        // Implement logic to retrieve current user location
-        // You can use LocationManager or other location APIs
-        // For demonstration purposes, returning a mock location
+    // Method to get the current user's location
+    private Location getCurrentUserLocation(double latitude, double longitude) {
         Location mockLocation = new Location("mock");
-        mockLocation.setLatitude(28.659);
-        mockLocation.setLongitude(77.340);
+        mockLocation.setLatitude(latitude);
+        mockLocation.setLongitude(longitude);
+        Log.d(TAG, "Current user location: Latitude = " + latitude + ", Longitude = " + longitude);
         return mockLocation;
     }
 
@@ -228,8 +298,12 @@ public class EmergencyActivity extends AppCompatActivity {
                 nearestFaculty = entry.getKey();
             }
         }
-
+        Log.d(TAG, "Nearest faculty: " + nearestFaculty);
         return nearestFaculty;
     }
-}
 
+    // Interface for the faculty number callback
+    public interface FacultyNumberCallback {
+        void onCallback(String phoneNumber);
+    }
+}
