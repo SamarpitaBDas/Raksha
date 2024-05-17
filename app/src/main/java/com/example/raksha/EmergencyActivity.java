@@ -2,21 +2,25 @@ package com.example.raksha;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import android.net.Uri;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class EmergencyActivity extends AppCompatActivity {
 
-//    TODO loginpage-error, intents handle , white navbar, call , emergency nearest faculty, community tab beautify create
+    public static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
+
     public String emergencyusername;
     Button faculty_call;
     Button call_police;
@@ -24,9 +28,6 @@ public class EmergencyActivity extends AppCompatActivity {
     Button call_womenhp;
     Button call_womencommision;
     Button call_women_honor_call;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,6 @@ public class EmergencyActivity extends AppCompatActivity {
                 Intent intent = getIntent();
 
                 emergencyusername = intent.getStringExtra("username");
-//                Log.d("LoginActivity", "Username: " + emergencyusername);
                 if (itemId == R.id.home){
                     startActivity(new Intent(EmergencyActivity.this, HomeActivity.class)
                             .putExtra("username", emergencyusername));
@@ -73,84 +73,67 @@ public class EmergencyActivity extends AppCompatActivity {
             }
         });
 
-//        TODO create a query such that the nearest faculty is called
         faculty_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "1234567890";
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phoneNumber));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No app available to make calls", Toast.LENGTH_SHORT).show();
-                }
+                makePhoneCall("1234567890");
             }
         });
+
         call_police.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "7042191731";
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" +phoneNumber));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No app available to make calls", Toast.LENGTH_SHORT).show();
-                }
+                makePhoneCall("100");
             }
         });
+
         call_hospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "112";
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse(phoneNumber));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No app available to make calls", Toast.LENGTH_SHORT).show();
-                }
+                makePhoneCall("112");
             }
         });
+
         call_womenhp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "1090";
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse(phoneNumber));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No app available to make calls", Toast.LENGTH_SHORT).show();
-                }
+                makePhoneCall("1090");
             }
         });
+
         call_womencommision.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "9454401122";
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phoneNumber));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No app available to make calls", Toast.LENGTH_SHORT).show();
-                }
+                makePhoneCall("9454401122");
             }
         });
+
         call_women_honor_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "5222614978";
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + phoneNumber));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "No app available to make calls", Toast.LENGTH_SHORT).show();
-                }
+                makePhoneCall("5222614978");
             }
         });
     }
+
+    private void makePhoneCall(String phoneNumber) {
+        if (ContextCompat.checkSelfPermission(EmergencyActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(EmergencyActivity.this, new String[]{Manifest.permission.CALL_PHONE}, MY_PERMISSIONS_REQUEST_CALL_PHONE);
+        } else {
+            String dial = "tel:" + phoneNumber;
+            startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_PERMISSIONS_REQUEST_CALL_PHONE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            } else {
+                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
+

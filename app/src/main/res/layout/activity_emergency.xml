@@ -7,75 +7,85 @@
     tools:context=".EmergencyActivity">
 
 
+    <!--    women helpline 1090-->
+
+    <!--    Uttar Pradesh Women's Commission Helpline: +91-9454401122-->
+
+
     <Button
         android:id="@+id/faculty_call"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="100dp"
         android:backgroundTint="@color/lightpink"
         android:text="CALL FACULTY"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="119dp"
-        android:layout_margin="20dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/call_police"
+        tools:layout_editor_absoluteX="16dp" />
 
     <Button
         android:id="@+id/call_police"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_margin="20dp"
         android:backgroundTint="@color/lightpink"
         android:text="CALL 100"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="200dp"
-        android:layout_margin="20dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/call_womenhp"
+        app:layout_constraintTop_toTopOf="@+id/faculty_call"
+        tools:layout_editor_absoluteX="16dp" />
 
-    <Button
-        android:id="@+id/call_hospital"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/lightpink"
-        android:text="CALL AMBULANCE"
-        android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="280dp"
-        android:layout_margin="20dp"/>
-
-<!--    women helpline 1090-->
     <Button
         android:id="@+id/call_womenhp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/lightpink"
         android:text="CALL WOMEN HELPLINE"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="360dp"
-        android:layout_margin="20dp"/>
-
-<!--    Uttar Pradesh Women's Commission Helpline: +91-9454401122-->
+        app:layout_constraintBottom_toTopOf="@+id/call_hospital"
+        app:layout_constraintTop_toBottomOf="@+id/call_police"
+        tools:layout_editor_absoluteX="0dp" />
+    <Button
+        android:id="@+id/call_hospital"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="@color/lightpink"
+        android:text="CALL AMBULANCE"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/call_womencommision"
+        app:layout_constraintTop_toTopOf="@+id/call_womenhp"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="16dp" />
 
     <Button
         android:id="@+id/call_womencommision"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/lightpink"
         android:text="CALL WOMEN's COMMISION HELPLINE"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="440dp"
-        android:layout_margin="20dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/call_hospital"
+        app:layout_constraintTop_toBottomOf="@+id/call_women_honor_call"
+        tools:layout_editor_absoluteX="0dp" />
 
 <!--    Mahila Samman Prakoshth (Women's Honor Cell): +91-522-2614978-->
     <Button
         android:id="@+id/call_women_honor_call"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_margin="20dp"
         android:backgroundTint="@color/lightpink"
         android:text="CALL WOMEN's HONOR CALL"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="520dp"
-        android:layout_margin="20dp"/>
+        app:layout_constraintBottom_toTopOf="@+id/call_hospital"
+        app:layout_constraintTop_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
 
     <include layout="@layout/activity_nav_bottom" />
