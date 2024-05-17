@@ -105,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Start HomeActivity
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("username", userUsername); // Pass the username
                         startActivity(intent);

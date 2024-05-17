@@ -15,6 +15,8 @@ import android.net.Uri;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class EmergencyActivity extends AppCompatActivity {
+
+//    TODO loginpage-error, intents handle , white navbar, call , emergency nearest faculty, community tab beautify create
     public String emergencyusername;
     Button faculty_call;
     Button call_police;
@@ -32,6 +34,11 @@ public class EmergencyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_emergency);
 
         faculty_call = findViewById(R.id.faculty_call);
+        call_police = findViewById(R.id.call_police);
+        call_hospital = findViewById(R.id.call_hospital);
+        call_womenhp = findViewById(R.id.call_womenhp);
+        call_womencommision = findViewById(R.id.call_womencommision);
+        call_women_honor_call = findViewById(R.id.call_women_honor_call);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,6 +50,9 @@ public class EmergencyActivity extends AppCompatActivity {
                 emergencyusername = intent.getStringExtra("username");
 //                Log.d("LoginActivity", "Username: " + emergencyusername);
                 if (itemId == R.id.home){
+                    startActivity(new Intent(EmergencyActivity.this, HomeActivity.class)
+                            .putExtra("username", emergencyusername));
+
                     Intent homeIntent = new Intent(EmergencyActivity.this, HomeActivity.class);
                     homeIntent.putExtra("username", emergencyusername);
                     homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
@@ -80,9 +90,9 @@ public class EmergencyActivity extends AppCompatActivity {
         call_police.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String phoneNumber = "100";
+                String phoneNumber = "7042191731";
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse(phoneNumber));
+                intent.setData(Uri.parse("tel:" +phoneNumber));
                 if (intent.resolveActivity(getPackageManager()) != null) {
                     startActivity(intent);
                 } else {
