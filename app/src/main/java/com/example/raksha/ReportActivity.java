@@ -32,19 +32,19 @@ public class ReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report);
 
-        // Initialize EditText
+        // initializing EditText
         locationEditText = findViewById(R.id.locationEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         accusedEditText = findViewById(R.id.accusedEditText);
 
-        // Retrieve username from intent
+        //retriving username from intent
         Intent intent = getIntent();
         reportusername = intent.getStringExtra("username");
 
-        // Fetch user's location data from the database
+        //fetching users location data from database
         fetchUserLocationFromDatabase(reportusername);
 
-        // Set up bottom navigation
+        // Seting up bottom navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

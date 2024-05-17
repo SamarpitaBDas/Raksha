@@ -35,16 +35,17 @@
                         android:id="@+id/usernameTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Username"
-                        android:textStyle="bold" />
+                        android:text=""
+                        android:textStyle="bold"
+                        android:textSize="25dp"/>
 
                     <!-- Timestamp -->
                     <TextView
                         android:id="@+id/timestampTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Timestamp"
-                        android:textSize="12sp"
+                        android:text=""
+                        android:textSize="16sp"
                         android:textColor="@android:color/darker_gray" />
                 </LinearLayout>
             </LinearLayout>
@@ -56,7 +57,8 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
-                android:text="Post content goes here..."
+                android:layout_margin="16dp"
+                android:text=""
                 android:textSize="16sp" />
 
             <!-- Like/Comment Buttons -->
@@ -69,18 +71,20 @@
                 <!-- Like Button -->
                 <ImageButton
                     android:id="@+id/likeButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/like_button"
+                    android:layout_margin="6dp"
                     android:src="@drawable/ic_like" />
 
                 <!-- Comment Button -->
                 <ImageButton
                     android:id="@+id/commentButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:src="@drawable/ic_comment"
+                    android:layout_margin="6dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:contentDescription="@string/comment_button" />
             </LinearLayout>

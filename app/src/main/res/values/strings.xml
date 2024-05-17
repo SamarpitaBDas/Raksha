@@ -4,8 +4,8 @@
     <string name="tab_layout_description">Tabs for navigation</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="like_button" />
-    <string name="comment_button">\n\n</string>
+    <string name="like_button" >like button</string>
+    <string name="comment_button"> comment button </string>
 
 
 </resources>
