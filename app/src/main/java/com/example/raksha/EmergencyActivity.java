@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -16,12 +17,24 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class EmergencyActivity extends AppCompatActivity {
 
-//    TODO logic for emergency calling the nearest faculty
+    private Map<String, Location> facultyLocations = new HashMap<>();
+    private DatabaseReference databaseReference;
 
-//    TODO loginpage-error, intents handle , white navbar, call , emergency nearest faculty, community tab beautify create
+    //TODO logic for emergency calling the nearest faculty
+
+    //TODO loginpage-error, intents handle , white navbar, call , emergency nearest faculty, community tab beautify create
 
     //TODO bug fix opens by itself after login and doesn't let the homepage open up
     public static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1;
@@ -45,6 +58,13 @@ public class EmergencyActivity extends AppCompatActivity {
         call_womenhp = findViewById(R.id.call_womenhp);
         call_womencommision = findViewById(R.id.call_womencommision);
         call_women_honor_call = findViewById(R.id.call_women_honor_call);
+
+
+        // Initialize Firebase Realtime Database reference
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
+
+        // Populate faculty locations from Firebase Realtime Database
+        populateFacultyLocations();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,7 +101,17 @@ public class EmergencyActivity extends AppCompatActivity {
         faculty_call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                makePhoneCall("1234567890");
+                Location currentUserLocation = getCurrentUserLocation();
+                if (currentUserLocation != null) {
+                    String nearestFaculty = findNearestFaculty(currentUserLocation);
+                    if (nearestFaculty != null) {
+                        makePhoneCall(nearestFaculty);
+                    } else {
+                        Toast.makeText(EmergencyActivity.this, "No faculty found", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(EmergencyActivity.this, "Unable to retrieve user location", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -139,6 +169,67 @@ public class EmergencyActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    // Method to populate facultyLocations map with faculty members' locations
+    // Method to populate facultyLocations map with faculty members' locations
+    private void populateFacultyLocations() {
+        // Add listener to retrieve data from Firebase Realtime Database
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    // Get user data
+                    Map<String, Object> userData = (Map<String, Object>) userSnapshot.getValue();
+                    if (userData != null && "faculty".equals(userData.get("role"))) {
+                        String username = userSnapshot.getKey();
+                        double latitude = (double) userData.get("latitude");
+                        double longitude = (double) userData.get("longitude");
+                        // Add the faculty member's location to the map
+                        facultyLocations.put(username, new Location(username) {{
+                            setLatitude(latitude);
+                            setLongitude(longitude);
+                        }});
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle error
+                Toast.makeText(EmergencyActivity.this, "Failed to retrieve data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    // Method to get current user location
+    private Location getCurrentUserLocation() {
+        // Implement logic to retrieve current user location
+        // You can use LocationManager or other location APIs
+        // For demonstration purposes, returning a mock location
+        Location mockLocation = new Location("mock");
+        mockLocation.setLatitude(28.659);
+        mockLocation.setLongitude(77.340);
+        return mockLocation;
+    }
+
+    // Method to find the nearest faculty member
+    private String findNearestFaculty(Location currentUserLocation) {
+        String nearestFaculty = null;
+        float minDistance = Float.MAX_VALUE;
+
+        // Iterate through facultyLocations map to find the nearest faculty
+        for (Map.Entry<String, Location> entry : facultyLocations.entrySet()) {
+            Location facultyLocation = entry.getValue();
+            float distance = currentUserLocation.distanceTo(facultyLocation);
+            if (distance < minDistance) {
+                minDistance = distance;
+                nearestFaculty = entry.getKey();
+            }
+        }
+
+        return nearestFaculty;
     }
 }
 
