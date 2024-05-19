@@ -25,7 +25,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.example.raksha.R;
 import com.google.firebase.database.ValueEventListener;
 
 public class HomeActivity extends AppCompatActivity {
@@ -115,7 +114,13 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(HomeActivity.this, CommunityActivity.class)
                             .putExtra("username", homeusername));
                     return true;
-                }else {
+                }else if(itemId == R.id.map){
+                    Log.d("LoginActivity","username" + homeusername);
+                    startActivity(new Intent(HomeActivity.this, MapActivity.class)
+                            .putExtra("username", homeusername));
+                    return true;
+                }
+                else {
                     return false;
                 }
 
@@ -157,7 +162,7 @@ public class HomeActivity extends AppCompatActivity {
                     Location location = task.getResult();
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
-
+                    Log.e("Location", "Longitude: " + longitude + ", Latitude: " + latitude);
                     // Save location data to Firebase Realtime Database
                     saveLocationToDatabase(latitude, longitude);
                 } else {

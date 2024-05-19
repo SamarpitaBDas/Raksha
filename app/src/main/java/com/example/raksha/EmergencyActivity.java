@@ -102,7 +102,12 @@ public class EmergencyActivity extends AppCompatActivity {
                     startActivity(new Intent(EmergencyActivity.this, CommunityActivity.class)
                             .putExtra("username", emergencyusername));
                     return true;
-                } else {
+                } else if(itemId == R.id.map){
+                    Log.d("LoginActivity","username" + emergencyusername);
+                    startActivity(new Intent(EmergencyActivity.this, MapActivity.class)
+                            .putExtra("username", emergencyusername));
+                    return true;
+                }else {
                     return false;
                 }
             }
@@ -205,6 +210,25 @@ public class EmergencyActivity extends AppCompatActivity {
             String dial = "tel:" + phoneNumber;
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
             Log.d(TAG, "Making phone call to: " + phoneNumber);
+            saveEmergencyCallToDatabase(emergencyusername, latitude_em, longitude_em);
+        }
+    }
+
+    private void saveEmergencyCallToDatabase(String emergencyusername, double latitudeEm, double longitudeEm) {
+        DatabaseReference emergencyCallsRef = FirebaseDatabase.getInstance().getReference("emergency_calls");
+        String callId = emergencyCallsRef.push().getKey(); // Generate a unique key for the emergency call
+        if (callId != null) {
+            // Create a map to hold the emergency call data
+            Map<String, Object> emergencyCallData = new HashMap<>();
+            emergencyCallData.put("username", emergencyusername);
+            emergencyCallData.put("latitude", latitude_em);
+            emergencyCallData.put("longitude", longitude_em);
+
+            // Save the emergency call data to the database
+            emergencyCallsRef.child(callId).setValue(emergencyCallData);
+            Log.d(TAG, "Emergency call data saved to database");
+        } else {
+            Log.e(TAG, "Failed to generate a key for the emergency call");
         }
     }
 

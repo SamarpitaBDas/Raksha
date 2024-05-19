@@ -1,5 +1,7 @@
 @file:Suppress("UNUSED_EXPRESSION")
 
+import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -28,10 +30,7 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
+
 
     buildFeatures {
         viewBinding = true

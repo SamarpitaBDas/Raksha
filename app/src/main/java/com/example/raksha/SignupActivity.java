@@ -16,10 +16,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-//TODO storing the phonenumber and role of the user
 
 public class SignupActivity extends AppCompatActivity {
-    EditText signupPhoneNumber, signupUsername, signupEmail, signupPassword,signupinput;
+    EditText signupphone_number, signupUsername, signupEmail, signupPassword,signupinput;
     Button signupButton;
     FirebaseDatabase database;
     TextView loginRedirectText; // This was missing initialization
@@ -30,7 +29,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up_tab_fragment);
 
-        signupPhoneNumber = findViewById(R.id.signupphone_number);
+        signupphone_number = findViewById(R.id.signupphone_number);
         signupEmail = findViewById(R.id.signupEmail);
         signupUsername = findViewById(R.id.signupUsername);
         signupPassword = findViewById(R.id.signupPassword);
@@ -47,8 +46,9 @@ public class SignupActivity extends AppCompatActivity {
                 String email = signupEmail.getText().toString();
                 String username = signupUsername.getText().toString();
                 String password = signupPassword.getText().toString();
+                String phone_number = signupphone_number.getText().toString();
                 String role = signupinput.getText().toString(); // Get the selected role
-                HelperClass helperClass = new HelperClass(name, email, username, password, role);
+                HelperClass helperClass = new HelperClass(name, email, username, password, role, phone_number);
                 reference.child(username).setValue(helperClass);
                 Toast.makeText(SignupActivity.this, "You have signed up successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
@@ -67,8 +67,8 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         // Correct initialization for TextInputLayout and MaterialAutoCompleteTextView
-        TextInputLayout textInputLayout = findViewById(R.id.inputLayout);
-        MaterialAutoCompleteTextView autoCompleteTextView = findViewById(R.id.signupinputTV);
-        MaterialButton button = findViewById(R.id.signupbutton);
+//        TextInputLayout textInputLayout = findViewById(R.id.inputLayout);
+//        MaterialAutoCompleteTextView autoCompleteTextView = findViewById(R.id.signupinputTV);
+//        MaterialButton button = findViewById(R.id.signupbutton);
     }
 }

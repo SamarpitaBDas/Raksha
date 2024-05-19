@@ -2,7 +2,7 @@ package com.example.raksha;
 
 public class HelperClass {
 
-    String name, email, username, password,role;
+    String name, email, username, password,role,phone_number;
 
     public String getName() {
         return name;
@@ -37,13 +37,22 @@ public class HelperClass {
     }
     public void role(String role) {this.role = role;}
 
+    public String getphone_number() {
+        return phone_number;
+    }
 
-    public HelperClass(String name, String email, String username, String password, String role) {
+    public void setphone_number(String password) {
+        this.phone_number = phone_number;
+    }
+
+
+    public HelperClass(String name, String email, String username, String password, String role, String phone_number) {
         this.name = name;
         this.email = email;
         this.username = username;
         this.password = password;
         this.role = role;
+        this.phone_number = phone_number;
     }
 
     public HelperClass() {

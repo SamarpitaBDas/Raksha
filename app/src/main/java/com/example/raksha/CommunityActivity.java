@@ -73,7 +73,12 @@ public class CommunityActivity extends AppCompatActivity {
                     startActivity(new Intent(CommunityActivity.this, ReportActivity.class)
                             .putExtra("username", communityusername));
                     return true;
-                } else {
+                } else if(itemId == R.id.map){
+                    Log.d("LoginActivity","username" + communityusername);
+                    startActivity(new Intent(CommunityActivity.this, MapActivity.class)
+                            .putExtra("username", communityusername));
+                    return true;
+                }else {
                     return false;
                 }
             }

@@ -29,6 +29,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Raksha"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.apikey"
+            android:value="apikey" />
         <activity
             android:name=".MapActivity"
             android:exported="false" />

@@ -83,7 +83,7 @@
             app:cardElevation="4dp"
             app:cardBackgroundColor="@color/lightpink">
 
-            <!-- Email EditText -->
+            <!-- Phone number EditText -->
             <EditText
                 android:id="@+id/signupphone_number"
                 android:layout_width="match_parent"
