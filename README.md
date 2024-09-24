@@ -1,10 +1,6 @@
 # Raksha: Empowering Women's Safety & Community Support
 
-<br>
-
 ### Raksha is a comprehensive security and monitoring application designed to prioritize the safety of women in educational settings. With a user-friendly interface and powerful features, Raksha ensures a secure environment for students and teachers alike.
-
-<br>
 
 ## Key Features:
 
@@ -23,30 +19,22 @@ Raksha utilizes advanced mapping technology to identify and highlight reported a
 ### ✨ Emergency Call Routing:
 When an emergency call is initiated, Raksha intelligently connects the closest available teacher to the reporter's location, ensuring rapid response and assistance.
 
-<br>
-
 ## Raksha is more than just an application; it's a commitment to fostering a safe and supportive environment where women can thrive without fear. Join us in revolutionizing women's safety in educational institutions with Raksha.
 
 # Screenshots
 
-<br>
-
-<p float="left" align="center">
-  ![Screenshot1](screenshots/1.jpg)
-  ![Screenshot2](screenshots/2.jpg)
-  ![Screenshot3](screenshots/3.jpg)
-  ![Screenshot4](screenshots/4.jpg)
-  ![Screenshot5](screenshots/5.jpg)
-  ![Screenshot6](screenshots/6.jpg)
-</p>
-
-<br>
+<div align="center">
+  <img src="screenshots/1.jpg" width="18%" />
+  <img src="screenshots/2.jpg" width="18%" />
+  <img src="screenshots/3.jpg" width="18%" />
+  <img src="screenshots/4.jpg" width="18%" />
+  <img src="screenshots/5.jpg" width="18%" />
+  <img src="screenshots/6.jpg" width="18%" />
+</div>
 
 # How To Run
 
 ### Before Login First Make Sure That The Firebase Database Is Live Else You Won't Be Able To Login.
-
-<br>
 
 # Team Info
 ### Samarpita Das [Leader]
